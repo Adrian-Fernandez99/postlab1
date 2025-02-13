@@ -30,14 +30,14 @@ SETUP:
 // Configurar pines de entrada y salida (DDRx, PORTx, PINx)
 // PORTD como entrada con pull-up habilitado
 	LDI		R16, 0x00
-	OUT		DDRB, R16		// Setear puerto D como entrada
+	OUT		DDRB, R16		// Setear puerto B como entrada
 	LDI		R16, 0xFF
-	OUT		PORTB, R16		// Habilitar pull-ups en puerto D
+	OUT		PORTB, R16		// Habilitar pull-ups en puerto B
 
 // PORTB como salida inicialmente encendido
 	LDI		R16, 0xFF
-	OUT		DDRD, R16		// Setear puerto B como salida
-// PORTD como salida inicialmente encendido
+	OUT		DDRD, R16		// Setear puerto D como salida
+// PORTC como salida inicialmente encendido
 	LDI		R16, 0xFF
 	OUT		DDRC, R16		// Setear puerto C como salida
 
@@ -50,7 +50,6 @@ SETUP:
 	LDI		R21, 0x00		// Registro de contadores juntos
 
 // Se realiza el main loop
-
 CONTADOR:
 	MOV		R17, R16
 	OUT		PORTD, R21
@@ -59,7 +58,7 @@ CONTADOR:
 	BREQ	CONTADOR
 
 DECREMENTO1:
-	LDI		R17, 0xFB
+	LDI		R17, 0x1E
 	CP		R16, R17
 	BRNE	INCREMENTO1
 	CALL	DELAY
@@ -72,7 +71,7 @@ DECREMENTO1:
 	JMP		CONTADOR
 
 INCREMENTO1:
-	LDI		R17, 0xF7
+	LDI		R17, 0x1D
 	CP		R16, R17
 	BRNE	DECREMENTO2
 	CALL	DELAY
@@ -85,7 +84,7 @@ INCREMENTO1:
 	JMP		CONTADOR
 
 DECREMENTO2:
-	LDI		R17, 0xEF
+	LDI		R17, 0x1B
 	CP		R16, R17
 	BRNE	INCREMENTO2
 	CALL	DELAY
@@ -98,7 +97,7 @@ DECREMENTO2:
 	JMP		CONTADOR
 
 INCREMENTO2:
-	LDI		R17, 0xDF
+	LDI		R17, 0x17
 	CP		R16, R17
 	BRNE	CONTADOR
 	CALL	DELAY
@@ -149,7 +148,7 @@ RESTA1:
 SUMA2:
 	INC		R20
 	SBRC	R20, 4
-	LDI		R20, 0x0F
+	LDI		R20, 0x00
 	RET
 
 RESTA2:
@@ -161,28 +160,28 @@ RESTA2:
 BOTON_SUELTO:
 	CALL	DELAY
 	IN		R16, PINB
-	SBIS	PINB, 2
+	SBIS	PINB, 0
 	RJMP	BOTON_SUELTO
 	RET
 
 BOTON_SUELTO2:
 	CALL	DELAY
 	IN		R16, PINB
-	SBIS	PINB, 3
+	SBIS	PINB, 1
 	RJMP	BOTON_SUELTO2
 	RET
 
 BOTON_SUELTO3:
 	CALL	DELAY
 	IN		R16, PINB
-	SBIS	PINB, 4
+	SBIS	PINB, 2
 	RJMP	BOTON_SUELTO3
 	RET
 
 BOTON_SUELTO4:
 	CALL	DELAY
 	IN		R16, PINB
-	SBIS	PINB, 5
+	SBIS	PINB, 3
 	RJMP	BOTON_SUELTO4
 	RET
 
