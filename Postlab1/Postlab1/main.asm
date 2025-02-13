@@ -41,6 +41,11 @@ SETUP:
 	LDI		R16, 0xFF
 	OUT		DDRC, R16		// Setear puerto C como salida
 
+	LDI		R16, (1 << CLKPCE)		// Habilitar cambio de prescaler
+	STS		CLKPR, R16
+	LDI		R16, (1 << CLKPS2)
+	STS		CLKPR, R16				// CONFIGURAMOS PRESCALER A 16 F_CPU = 1Mhz
+
 // Realizar variables
 	LDI		R16, 0xFF		// Registro de ingresos
 	LDI		R17, 0xFF		// Registro de comparación
